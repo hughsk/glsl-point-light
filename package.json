@@ -1,0 +1,44 @@
+{
+  "name": "glsl-point-light",
+  "version": "0.0.0",
+  "description": "A reusable GLSL point light function",
+  "main": "index.glsl",
+  "dependencies": {},
+  "devDependencies": {
+    "beefy": "~0.4.1",
+    "glslifyify": "0.0.0",
+    "browserify": "~2.29.1",
+    "gl-buffer": "~0.1.1",
+    "gl-matrix": "~2.0.0",
+    "gl-now": "~0.0.4",
+    "gl-shader": "~0.0.6",
+    "gl-vao": "~0.0.2",
+    "heightmap-mesher": "~0.0.0",
+    "mesh-normals": "~0.0.0",
+    "ndarray-fill": "~0.1.0",
+    "perlin": "~1.0.0",
+    "zeros": "~0.0.0",
+    "basic-camera": "0.0.0",
+    "tweakable": "0.0.0",
+    "glsl-noise": "0.0.0"
+  },
+  "scripts": {
+    "start": "beefy demo.js:bundle.js --live -- -t glslifyify",
+    "prepublish": "browserify -t glslifyify demo.js > bundle.js"
+  },
+  "author": "Hugh Kennedy <hughskennedy@gmail.com> (http://hughskennedy.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/glsl-point-light.git"
+  },
+  "keywords": [
+    "glsl",
+    "shader",
+    "point",
+    "lighting"
+  ],
+  "bugs": {
+    "url": "https://github.com/hughsk/glsl-point-light/issues"
+  }
+}
