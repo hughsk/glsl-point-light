@@ -18,7 +18,6 @@ Exports `vec3 point_light`, which takes the following arguments:
 * `vec3 light_position`: the x/y/z position of the light.
 * `vec3 current_position`: the x/y/z position of the current fragment/vertex.
 * `vec3 normal`: a normalized normal vector for the current fragment/vertex.
-* `vec3 radius`: the radius of the light source.
 
 You must also specify your lighting's attenuation properties when requiring
 this module:

@@ -19,8 +19,7 @@
     "perlin": "~1.0.0",
     "zeros": "~0.0.0",
     "basic-camera": "0.0.0",
-    "tweakable": "0.0.0",
-    "glsl-noise": "0.0.0"
+    "tweakable": "0.0.0"
   },
   "scripts": {
     "start": "beefy demo.js:bundle.js --live -- -t glslifyify",

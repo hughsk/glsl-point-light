@@ -28,7 +28,7 @@ void main() {
   gl_Position = trans * model * vec4(position, 1.0);
 
   vLightWeighting = uAmbientColor
-    + lighting(uaPointColor, project(uaPointPosition, trans), gl_Position.xyz, project(normal, trans), 0.0002) * 0.125
-    + lighting(ubPointColor, project(ubPointPosition, trans), gl_Position.xyz, project(normal, trans), 0.0002) * 0.125
+    + lighting(uaPointColor, project(uaPointPosition, trans), gl_Position.xyz, project(normal, trans)) * 0.125
+    + lighting(ubPointColor, project(ubPointPosition, trans), gl_Position.xyz, project(normal, trans)) * 0.125
     ;
 }
