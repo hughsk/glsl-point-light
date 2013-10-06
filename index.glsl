@@ -9,7 +9,7 @@ vec3 point_light(
   const vec3 normal
 ) {
   float dist = distance(light_position, current_position);
-  float attenuation = kc / ((1.0 + kl*dist)*(1.0 + kq*dist*dist));
+  float attenuation = 1.0 / (kc+(kl*dist)+(kq*dist*dist));
 
   return color * attenuation * max(dot(normal, normalize(current_position - light_position)), 0.0);
 }
