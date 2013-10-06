@@ -3,7 +3,7 @@
 A reusable GLSL point light function for use with
 [glslify](http://github.com/chrisdickinson/glslify).
 
-[![glsl-point-light](http://i.imgur.com/Sh0ceiW.png)](http://hughsk.github.com/glsl-point-light)
+[![glsl-point-light](http://i.imgur.com/ZwJKPKn.png)](http://hughsk.github.com/glsl-point-light)
 
 **[view demo](http://hughsk.github.com/glsl-point-light)**
 
