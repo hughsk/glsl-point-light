@@ -66,10 +66,10 @@ function render() {
   shader.uniforms.projection = projection
   shader.uniforms.view = view
 
-  shader.uniforms.uaPointPosition = [Math.sin(0.038*0.1 * t)*2, 0.5, Math.cos(0.038*0.1 * t)*2]
+  shader.uniforms.uaPointPosition = [Math.sin(0.038*0.1 * t)*2, -1.8, Math.cos(0.038*0.1 * t)*2]
   shader.uniforms.uaPointColor = [(+sidebar.dr.value|0)/255, (+sidebar.dg.value|0)/255, (+sidebar.db.value|0)/255]
 
-  shader.uniforms.ubPointPosition = [Math.sin(0.053*0.1 * -t)*-2, 0.5, Math.cos(0.053*0.1 * -t)*-2]
+  shader.uniforms.ubPointPosition = [Math.sin(0.053*0.1 * -t)*-2, -1.8, Math.cos(0.053*0.1 * -t)*-2]
   shader.uniforms.ubPointColor = [(+sidebar.br.value|0)/255, (+sidebar.bg.value|0)/255, (+sidebar.bb.value|0)/255]
 
   shader.uniforms.uAmbientColor = [(+sidebar.ar.value|0)/255, (+sidebar.ag.value|0)/255, (+sidebar.ab.value|0)/255]
