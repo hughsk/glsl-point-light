@@ -67,10 +67,10 @@ function render() {
   shader.uniforms.projection = projection
   shader.uniforms.view = view
 
-  shader.uniforms.uaPointPosition = [Math.sin(0.038*0.1 * t)*2, 0, Math.cos(0.038*0.1 * t)*2]
+  shader.uniforms.uaPointPosition = [Math.sin(0.038*0.1 * t)*2, -1.8, Math.cos(0.038*0.1 * t)*2]
   shader.uniforms.uaPointColor = [(+sidebar.dr.value|0)/255, (+sidebar.dg.value|0)/255, (+sidebar.db.value|0)/255]
 
-  shader.uniforms.ubPointPosition = [Math.sin(0.053*0.1 * -t)*-2, 0, Math.cos(0.053*0.1 * -t)*-2]
+  shader.uniforms.ubPointPosition = [Math.sin(0.053*0.1 * -t)*-2, -1.8, Math.cos(0.053*0.1 * -t)*-2]
   shader.uniforms.ubPointColor = [(+sidebar.br.value|0)/255, (+sidebar.bg.value|0)/255, (+sidebar.bb.value|0)/255]
 
   shader.uniforms.uAmbientColor = [(+sidebar.ar.value|0)/255, (+sidebar.ag.value|0)/255, (+sidebar.ab.value|0)/255]
@@ -14399,7 +14399,7 @@ module.exports = function zeros(shape) {
 },{"ndarray":64}],67:[function(require,module,exports){
 module.exports = "\nprecision mediump float;\nvarying vec3 vLightWeighting;\nvoid main() {\n  vec3 terrainColor = vLightWeighting * vec3(1.0);\n  gl_FragColor = vec4(terrainColor, 1.0);\n}"
 },{}],68:[function(require,module,exports){
-module.exports = "\nattribute vec3 position;\nattribute vec3 normal;\nuniform vec3 uAmbientColor;\nuniform vec3 uaPointColor;\nuniform vec3 ubPointColor;\nuniform vec3 uaPointPosition;\nuniform vec3 ubPointPosition;\nuniform mat4 projection;\nuniform mat4 model;\nuniform mat4 view;\nvarying vec3 vPosition;\nvarying vec3 vLightWeighting;\nvec3 a_x_point_light(const vec3 color, const vec3 light_position, const vec3 current_position, const vec3 normal, const float radius) {\n  float dist = distance(light_position, current_position);\n  float attenuation = 1.0 / ((1.0 + 0.05 * dist) * (1.0 + 0.05 * dist * dist));\n  return color * attenuation * max(dot(normal, normalize(current_position - light_position)), 0.0);\n}\nvec3 project(vec3 pos, mat4 projection) {\n  return (projection * vec4(pos, 1.0)).xyz;\n}\nvoid main() {\n  mat4 trans = projection * view;\n  gl_Position = trans * model * vec4(position, 1.0);\n  vLightWeighting = uAmbientColor + a_x_point_light(uaPointColor, project(uaPointPosition, trans), gl_Position.xyz, project(normal, trans), 0.0002) * 0.125 + a_x_point_light(ubPointColor, project(ubPointPosition, trans), gl_Position.xyz, project(normal, trans), 0.0002) * 0.125;\n}"
+module.exports = "\nattribute vec3 position;\nattribute vec3 normal;\nuniform vec3 uAmbientColor;\nuniform vec3 uaPointColor;\nuniform vec3 ubPointColor;\nuniform vec3 uaPointPosition;\nuniform vec3 ubPointPosition;\nuniform mat4 projection;\nuniform mat4 model;\nuniform mat4 view;\nvarying vec3 vPosition;\nvarying vec3 vLightWeighting;\nvec3 a_x_point_light(const vec3 color, const vec3 light_position, const vec3 current_position, const vec3 normal, const vec3 k) {\n  float dist = distance(light_position, current_position);\n  float attenuation = 1.0 / (k.x + (k.y * dist) + (k.z * dist * dist));\n  return color * attenuation * max(dot(normal, normalize(current_position - light_position)), 0.0);\n}\nconst vec3 falloff = vec3(1.0, 0.05, 0.3);\nvec3 trans(vec3 pos) {\n  return (model * vec4(pos, 1.0)).xyz;\n}\nvoid main() {\n  gl_Position = projection * view * model * vec4(position, 1.0);\n  vLightWeighting = uAmbientColor + a_x_point_light(uaPointColor, uaPointPosition, trans(position), normal, falloff) * 1.5 + a_x_point_light(ubPointColor, ubPointPosition, trans(position), normal, falloff) * 1.5;\n}"
 },{}],69:[function(require,module,exports){
 var process=require("__browserify_process");var tweakable = require('tweakable')
 var Textbox = tweakable()
@@ -14442,10 +14442,10 @@ function sidebar() {
     sb.ag.write('0')
     sb.ab.write('20')
     sb.dr.write('255')
-    sb.dg.write('100')
-    sb.db.write('0')
-    sb.br.write('45')
-    sb.bg.write('95')
+    sb.dg.write('150')
+    sb.db.write('50')
+    sb.br.write('50')
+    sb.bg.write('100')
     sb.bb.write('255')
   })
 
