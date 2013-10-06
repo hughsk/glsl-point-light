@@ -14,7 +14,9 @@ uniform mat4 view;
 varying vec3 vPosition;
 varying vec3 vLightWeighting;
 
-#pragma glslify: lighting = require(../index, kc=1.0, kl=0.05, kq=0.3)
+#pragma glslify: lighting = require(../index)
+
+const vec3 falloff = vec3(1.0, 0.05, 0.3);
 
 // Needed to convert the position
 // vector into screen space to line up with
@@ -27,7 +29,7 @@ void main() {
   gl_Position = projection * view * model * vec4(position, 1.0);
 
   vLightWeighting = uAmbientColor
-    + lighting(uaPointColor, uaPointPosition, trans(position), normal) * 1.5
-    + lighting(ubPointColor, ubPointPosition, trans(position), normal) * 1.5
+    + lighting(uaPointColor, uaPointPosition, trans(position), normal, falloff) * 1.5
+    + lighting(ubPointColor, ubPointPosition, trans(position), normal, falloff) * 1.5
     ;
 }
